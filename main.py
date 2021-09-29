@@ -10,7 +10,8 @@ counter.delete(0, "end")
 root = Tk() 
 root.geometry("350x430")
 root.resizable(0, 0)
-root.title("The Calculator")
+root.title("PyCalc")
+root.iconphoto(False, PhotoImage(file="plus.png"))
 
 # Create Application
 app = root
