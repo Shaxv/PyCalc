@@ -1,6 +1,4 @@
 from tkinter import *
-import operator
-import sympy
 
 # Create the basic window
 root = Tk() 
@@ -12,17 +10,13 @@ root.iconphoto(False, PhotoImage(file="plus.png"))
 # Create Application
 app = root
 
-#
-# Input
-#
-
 # Input Frame
 input_text = StringVar()
-input_frame = Frame(app, width=312, height=50, highlightbackground="black", highlightcolor="black", highlightthickness=2)
+input_frame = Frame(app, width=312, height=50, highlightbackground="black", highlightcolor="black", highlightthickness=1)
 input_frame.pack(side=TOP)
 
 # Input Field
-input_field = Entry(input_frame, font=("Helvetica", 20, "bold"), textvariable=input_text, width=50, bg="#eee", justify=LEFT)
+input_field = Entry(input_frame, font=("Helvetica", 20, "bold"), textvariable=input_text, width=22, bg="#eee", justify=LEFT)
 input_field.grid(row=0, column=0)
 input_field.pack(ipady=10)
 
@@ -30,32 +24,18 @@ def clear():
     input_field.delete(0, "end")
 
 def click(item):
-    ops = {
-        "+": operator.add,
-        "-": operator.sub,
-        "/": operator.truediv,
-        "*": operator.mul
-    }
-    op = ""
-    num1 = 0
-    num2 = 0
     if type(item) != str:
+        if input_text.get() == "Error":
+            input_field.delete(0, "end")
         input_text.set(input_text.get() + str(item))
-        if op == "":
-            num1 = input_text.get()
-        else:
-            num2 = input
     elif item == "=":
-        input_text.set(sympy.sympify(input_text.get()))
-
-    elif type(item) == str and op == "":
-        op = item
+        if input_text.get() != "":
+            try:
+                input_text.set(eval(input_text.get()))
+            except:
+                input_text.set("Error")
+    elif type(item) == str:
         input_text.set(input_text.get() + item)
-
-
-#
-# Buttons
-#
 
 # Button Frame
 buttons_frame = Frame(app, width=312, height=272.5, bg="grey")
@@ -85,7 +65,8 @@ btn_plus = Button(buttons_frame, text="+", fg="black", width=10, height=4, bg="#
 
 # Fifth Button Row
 
-btn_zero = Button(buttons_frame, text="0", fg="black", width=34, height=4, bg="#eee", command=lambda: click(0)).grid(row=4, column=0, columnspan=3, padx=1, pady=1)
+btn_zero = Button(buttons_frame, text="0", fg="black", width=22, height=4, bg="#eee", command=lambda: click(0)).grid(row=4, column=0, columnspan=2, padx=1, pady=1)
+btn_point = Button(buttons_frame, text=".", fg="black", width=10, height=4, bg="#eee", command=lambda: click(".")).grid(row=4, column=2, padx=1, pady=1)
 btn_equals = Button(buttons_frame, text="=", fg="black", width=10, height=4, bg="#eee", command=lambda: click("=")).grid(row=4, column=3, padx=1, pady=1)
 
 
