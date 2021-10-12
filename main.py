@@ -16,7 +16,7 @@ input_frame = Frame(app, width=312, height=50, highlightbackground="black", high
 input_frame.pack(side=TOP)
 
 # Input Field
-input_field = Entry(input_frame, font=("Helvetica", 20, "bold"), textvariable=input_text, width=22, bg="#eee", justify=LEFT)
+input_field = Entry(input_frame, font=("Helvetica", 18, "bold"), textvariable=input_text, width=25, bg="#eee", justify=LEFT)
 input_field.grid(row=0, column=0)
 input_field.pack(ipady=10)
 
